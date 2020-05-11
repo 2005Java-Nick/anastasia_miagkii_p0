@@ -2,13 +2,22 @@ package voter;
 
 public class Voter {
 	
+	public Voter(){
+		
+	}
+	
+	public Voter(String fullName, String id) {
+		this.id = id;
+		this.fullName = fullName;
+	}
+	
 	//Setting all properties of voter
 
 	private String id;
 	
 	private int age;
 	
-	private String fullName;
+	public static String fullName;
 	
 	private int vote;
 	

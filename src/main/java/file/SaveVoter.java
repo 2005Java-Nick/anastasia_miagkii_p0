@@ -9,7 +9,7 @@ public class SaveVoter {
     String idNumber = null;
     
     
-    public void storeUserData(String name, String id){
+    public void storeUserData(String name, String id, String birthDate){
         
         fullName = name;
         System.out.println("Full Name is: " + fullName);

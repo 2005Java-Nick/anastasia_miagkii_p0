@@ -67,7 +67,7 @@ public class Registration {
 		}
 	
 		if(logic.CalculateAge(dateOfBirth) && logic.IdLength(id) && logic.hasSpace(fullName)) {
-			saveFile.storeUserData(fullName, id);
+			saveFile.storeUserData(fullName, id, dateOfBirth);
 		}
 		vote.accessToVote();//if nothing was failed then person can vote
 	
