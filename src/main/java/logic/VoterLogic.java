@@ -6,12 +6,8 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.regex.Pattern;
 
 public class VoterLogic {
-	
-	//creating objects
-	AdminPassword admin = new AdminPassword();
 	
 	//checks if person is 18 and older
 	public boolean CalculateAge(String birthDate) throws ParseException {
@@ -38,21 +34,13 @@ public class VoterLogic {
 	}
 	
 	//check if id contains 5-digits
-	public boolean IdLength(String id) {
-		if(id.matches("[0-9]+") && id.length() == 5) {
+	public boolean passportLength(String num) {
+		if(num.matches("[0-9]+") && num.length() == 9 && num.charAt(0)=='5') {
 			return true;
 		}else
 		return false;
 	}
 
-//check if name contains only letters (METHOD DOESN'T WORK!!!)
-//	public boolean isLetters(String fullName) {
-//		if (Pattern.matches("[a-zA-Z]+",fullName)) { 
-//			  return true;
-//			}else{
-//			  return false;    
-//			}
-//	}
 	
 	//check if person typed full name, should contain space
 	public boolean hasSpace (String fullName ) {
@@ -73,7 +61,14 @@ public class VoterLogic {
 		}
 	}
 
-	
+	public boolean isCitizen(String answer) {
+		if(answer.equalsIgnoreCase("y") || answer.equalsIgnoreCase("yes")) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
 	
 }
 	

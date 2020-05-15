@@ -6,28 +6,29 @@ import java.text.ParseException;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
-import file.SaveVoter;
-import logic.AdminPassword;
 import logic.VoterLogic;
 import menu.Voting;
 import voter.Voter;
 
 public class Registration {
 	
+	private Scanner scan = new Scanner(System.in); //user input
+	
 	public void signUp() throws ParseException, InterruptedException {
 		
-	Scanner scan = new Scanner(System.in); //user input
+	
 	
 	//creating objects
 	Voter voter = new Voter(); 
 	VoterLogic logic = new VoterLogic();
 	Voting vote = new Voting();
-	SaveVoter saveFile = new SaveVoter();
 	
-	//asks for user full name
 	System.out.println("Please enter your full name:");
 	String fullName = scan.nextLine(); //saves input to full name
 	voter.setFullName(fullName);
+	String passportChoice;
+	
+	
 	
 	//check if name contains space
 		if(!(logic.hasSpace(fullName) )) {//if not:
@@ -35,26 +36,29 @@ public class Registration {
 			TimeUnit.SECONDS.sleep(3);
 			signUp();//failed, start again registration
 		}
-	
-	
-// check if name contains only letters (FUNCTION DOESN'T WORK!!!)	
-//	if(!(logic.isLetters(fullName))) {
-//		System.out.println("Sorry, your name should contain only letters. \n\n\n\n\n\n\n\n ");
-//		TimeUnit.SECONDS.sleep(3);
-//		authorize();
-//	}
-	
-	
-	//asks for voter to register ID
-	System.out.println("Please enter your 5-digit ID number:");
-	String id = scan.nextLine();
-	voter.setId(id);
-	if(!(logic.IdLength(id))) {
-		System.out.println("Sorry, your ID should contain 5-digits. \n\n\n\n\n\n\n\n ");
+		
+	System.out.println("Are you citizen of United States?");
+	passportChoice = scan.nextLine();
+	if(!(logic.isCitizen(passportChoice))){
+		System.out.println("Sorry, only citizens of Unites States can vote. Bye!");
 		TimeUnit.SECONDS.sleep(3);
 		Welcome.welcome();
 	}
 	
+	//asks for voter to register ID
+	System.out.println("Please enter your passport number:");
+	String passNumber = scan.nextLine();
+	voter.setId(passNumber);
+	
+	
+	
+	if(!(logic.passportLength(passNumber))) {
+		System.out.println("Sorry, The passport number must begin with 5 and be 9 numbers long. Please, start over. \n\n\n\n\n\n\n\n ");
+		TimeUnit.SECONDS.sleep(5);
+		signUp();
+	}
+	
+
 	//asks for voter for his date of birth
 	System.out.println("Please enter date of birth (yyyy/MM/dd): ");
 	String dateOfBirth = scan.nextLine();
@@ -66,10 +70,11 @@ public class Registration {
 		Welcome.welcome();
 		}
 	
-		if(logic.CalculateAge(dateOfBirth) && logic.IdLength(id) && logic.hasSpace(fullName)) {
-			saveFile.storeUserData(fullName, id, dateOfBirth);
+		if(logic.CalculateAge(dateOfBirth) && logic.passportLength(passNumber) && logic.hasSpace(fullName)) {
+			//SAVE DATA TO DATABASE!!!!
 		}
-		vote.accessToVote();//if nothing was failed then person can vote
+		
+				vote.accessToVote();//if nothing was failed then person can vote
 	
 		}
 	}

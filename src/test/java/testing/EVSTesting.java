@@ -15,18 +15,13 @@ import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Rule;
-import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import authorization.CloseVoting;
 import authorization.Logging;
 import authorization.Registration;
 import authorization.Welcome;
-import file.ReadFile;
-import file.SaveVoter;
-import logic.AdminPassword;
 import logic.VoterLogic;
-import menu.AdminMenu;
 import menu.Voting;
 import voter.Voter;
 
@@ -66,14 +61,7 @@ public class EVSTesting {
 	private static final Logging logging = new Logging();
 	private static final Registration registration = new Registration();
 	private static final Welcome welcome = new Welcome();
-	
-	private static final ReadFile readFile = new ReadFile();
-	private static final SaveVoter saveVoter = new SaveVoter();
-	
-	private static final AdminPassword adminPassword = new AdminPassword();
 	private static final VoterLogic voterLogic = new VoterLogic();
-	
-	private static final AdminMenu adminMenu = new AdminMenu();
 	private static final Voting voting = new Voting();
 	private static final Voter voter = new Voter();
 	
@@ -104,23 +92,23 @@ public class EVSTesting {
 	}
 	
 	@Test
-	public void checkIdLengthMoreThanFive() {
-		assertEquals(false, voterLogic.IdLength("1234567"));
+	public void checkPassportNumberLengthMoreThanNine() {
+		assertEquals(false, voterLogic.passportLength("12345678900"));
 	}
 	
 	@Test
-	public void checkIdLengthLessThanFive() {
-		assertEquals(false, voterLogic.IdLength("1234"));
+	public void checkPassportNumberLengthLessThanNine() {
+		assertEquals(false, voterLogic.passportLength("1234"));
 	}
 	
 	@Test
-	public void checkIdContainsDigits() {
-		assertEquals(false, voterLogic.IdLength("ABCDE"));
+	public void checkPassportNumberContainsDigits() {
+		assertEquals(false, voterLogic.passportLength("ABCDE"));
 	}
 	
 	@Test
-	public void checkIdLengthIsFive() {
-		assertEquals(true, voterLogic.IdLength("12345"));
+	public void checkPassportNumberLengthIsNine() {
+		assertEquals(true, voterLogic.passportLength("523456789"));
 	}
 	
 	@Test
@@ -142,5 +130,28 @@ public class EVSTesting {
 	public void isNotAdmin() {
 		assertEquals(false, voterLogic.checkAdmin("Anastasia"));
 	}
+	
+	@Test
+	public void isNotCitizen() {
+		assertEquals(false, voterLogic.isCitizen("No"));
+	}
 
+	@Test
+	public void isNotCitizen2() {
+		assertEquals(false, voterLogic.isCitizen("n"));
+	}
+	
+	@Test
+	public void isCitizen() {
+		assertEquals(true, voterLogic.isCitizen("Yes"));
+	}
+	
+	@Test
+	public void isCitizen2() {
+		assertEquals(true, voterLogic.isCitizen("y"));
+	}
+	
+	
+	
+	
 }

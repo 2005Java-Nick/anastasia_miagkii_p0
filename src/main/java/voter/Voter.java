@@ -1,19 +1,11 @@
 package voter;
 
 public class Voter {
-	
-	public Voter(){
-		
-	}
-	
-	public Voter(String fullName, String id) {
-		this.id = id;
-		this.fullName = fullName;
-	}
+
 	
 	//Setting all properties of voter
 
-	private String id;
+	private String passport;
 	
 	private int age;
 	
@@ -24,11 +16,11 @@ public class Voter {
 	private String birthDate;
 
 	public String getId() {
-		return id;
+		return passport;
 	}
 
 	public void setId(String id) {
-		this.id = id;
+		this.passport = id;
 	}
 
 	public int getAge() {
@@ -65,7 +57,7 @@ public class Voter {
 
 	@Override
 	public String toString() {
-		return "Voter [id=" + id + ", fullName=" + fullName + "]";
+		return "Voter [id=" + passport + ", fullName=" + fullName + "]";
 	}
 	
 	

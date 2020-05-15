@@ -2,6 +2,7 @@
 package menu;
 
 import java.text.ParseException;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
@@ -18,7 +19,7 @@ public class Voting {
 	private Scanner scan = new Scanner(System.in);
 	
 	
-	public void accessToVote() throws InterruptedException, ParseException { 
+	public void accessToVote() throws InterruptedException, ParseException,NoSuchElementException { 
 		
 		CloseVoting close = new CloseVoting();
 		
