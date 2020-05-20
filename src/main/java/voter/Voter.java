@@ -5,22 +5,26 @@ public class Voter {
 	
 	//Setting all properties of voter
 
-	private String passport;
+	private static String passportNumber;
 	
-	private int age;
+	private static int age;
 	
-	public static String fullName;
+	private static String fullName;
 	
-	private int vote;
+	private static String birthDate;
 	
-	private String birthDate;
+	private static String vote;
+	
+	
+	
+	//GETTERS AND SETTERS
 
-	public String getId() {
-		return passport;
+	public String getPassportNumber() {
+		return passportNumber;
 	}
 
-	public void setId(String id) {
-		this.passport = id;
+	public void setPassportNumber(String passportNumber) {
+		this.passportNumber = passportNumber;
 	}
 
 	public int getAge() {
@@ -39,11 +43,11 @@ public class Voter {
 		this.fullName = fullName;
 	}
 
-	public int getVote() {
+	public String getVote() {
 		return vote;
 	}
 
-	public void setVote(int vote) {
+	public void setVote(String vote) {
 		this.vote = vote;
 	}
 
@@ -57,8 +61,12 @@ public class Voter {
 
 	@Override
 	public String toString() {
-		return "Voter [id=" + passport + ", fullName=" + fullName + "]";
+		return "Voter [passport=" + passportNumber + ", fullName=" + fullName + ", birthDate=" + birthDate + ", vote=" + vote
+				+ "]";
 	}
+
+
+	
 	
 	
 	

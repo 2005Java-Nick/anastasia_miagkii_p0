@@ -2,10 +2,13 @@
 
 package authorization;
 
+import org.apache.log4j.Logger;
+
 import java.text.ParseException;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
+import database.VoterDAOPostgres;
 import logic.VoterLogic;
 import menu.Voting;
 import voter.Voter;
@@ -13,6 +16,7 @@ import voter.Voter;
 public class Registration {
 	
 	private Scanner scan = new Scanner(System.in); //user input
+	private static Logger log = Logger.getRootLogger();
 	
 	public void signUp() throws ParseException, InterruptedException {
 		
@@ -25,10 +29,8 @@ public class Registration {
 	
 	System.out.println("Please enter your full name:");
 	String fullName = scan.nextLine(); //saves input to full name
-	voter.setFullName(fullName);
 	String passportChoice;
-	
-	
+	//VoterDAO voterDao = new VoterDAO();
 	
 	//check if name contains space
 		if(!(logic.hasSpace(fullName) )) {//if not:
@@ -37,18 +39,22 @@ public class Registration {
 			signUp();//failed, start again registration
 		}
 		
+	voter.setFullName(fullName);
+	
+	//Voter v = VoterDAO.getVoter(fullName);
+		
 	System.out.println("Are you citizen of United States?");
 	passportChoice = scan.nextLine();
-	if(!(logic.isCitizen(passportChoice))){
-		System.out.println("Sorry, only citizens of Unites States can vote. Bye!");
-		TimeUnit.SECONDS.sleep(3);
-		Welcome.welcome();
-	}
+		if(!(logic.isCitizen(passportChoice))){
+			System.out.println("Sorry, only citizens of Unites States can vote. Bye!");
+			TimeUnit.SECONDS.sleep(3);
+			Welcome.welcome();
+		}
 	
 	//asks for voter to register ID
 	System.out.println("Please enter your passport number:");
 	String passNumber = scan.nextLine();
-	voter.setId(passNumber);
+	voter.setPassportNumber(passNumber);
 	
 	
 	
@@ -71,10 +77,10 @@ public class Registration {
 		}
 	
 		if(logic.CalculateAge(dateOfBirth) && logic.passportLength(passNumber) && logic.hasSpace(fullName)) {
-			//SAVE DATA TO DATABASE!!!!
-		}
-		
-				vote.accessToVote();//if nothing was failed then person can vote
+				//vote.accessToVote();//if nothing was failed then person can vote
+				Terms.termsAndConditions();
+			log.info("New voter!");
+			}
 	
 		}
 	}

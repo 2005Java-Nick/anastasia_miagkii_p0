@@ -2,12 +2,14 @@ package logic;
 
 import java.util.Scanner;
 
+import database.VoterDAOPostgres;
 import menu.Voting;
 
 public class Admin {
 	
 	//creating objects
 	private Scanner scan = new Scanner(System.in);
+	VoterDAOPostgres voterDao = new VoterDAOPostgres();
 	
 	public void readPassword()  {//method to check password of admin
 		
@@ -27,8 +29,7 @@ public class Admin {
 		
 		//creating objects by accessing classes to see results
 		System.out.println("\n\n\n\n\n\nAdmin Hidden Menu: \nResults:");
-		System.out.println("Voted for NYC: " + Voting.nycVotes );//see NYC votes
-		System.out.println("Voted for LA: " + Voting.laVotes );//see LA votes
+		voterDao.getAllData();
 		scan.close();
 		
 	}

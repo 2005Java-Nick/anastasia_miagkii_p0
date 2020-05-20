@@ -21,8 +21,11 @@ public class Welcome {
 		Registration register = new Registration();
 		Logging login = new Logging();
 		
-		System.out.println("Welcome to Electronic Voting System!");
-		System.out.println("1. Sign up to vote \n2. Log in to your account");
+		System.out.println("\t\t\t________________________________________________________");
+		System.out.println("\n\t\t\t\t  Welcome to Electronic Voting System! ");
+		System.out.println("\t\t\t\t__________________________________________\n");
+		System.out.println("\t1. Sign up to vote \n\t2. Log in to your account (Only for those who have already voted!)");
+		System.out.println("\nPlease choose one of the above:");
 		
 		
 		choice = scan.nextInt();

@@ -7,6 +7,7 @@ package authorization;
 import java.text.ParseException;
 import java.util.Scanner;
 
+import database.VoterDAOPostgres;
 import logic.Admin;
 import logic.VoterLogic;
 
@@ -22,6 +23,8 @@ public class Logging {
 		//creating objects
 		VoterLogic logic = new VoterLogic();
 		Admin admin = new Admin();
+		VoterDAOPostgres voterDao = new VoterDAOPostgres();
+		CloseVoting close = new CloseVoting();
 		
 		
 		System.out.println("Please enter your passport number:");
@@ -31,7 +34,9 @@ public class Logging {
 					admin.readPassword(); //opens function to check password
 					}
 				else {
-					System.out.println("Your passport number is " + passportNum);
+					voterDao.getVoterInformation(passportNum);
+					System.out.println("\n");
+					close.close();
 				}
 	
 			}
